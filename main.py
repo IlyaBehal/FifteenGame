@@ -36,4 +36,16 @@ correct_board = board[:]
 shuffle(board)
 
 
+def click(event):
+    x, y = event.x, event.y
+    x = x // SQUARE_SIZE
+    y = y // SQUARE_SIZE
+    board_index = x + (y * BOARD_SIZE)
+    empty_index = get_empty_neighbor(board_index)
+    board[board_index], board[empty_index] = board[empty_index], board[board_index]
+    draw_board()
+    if board == correct_board:
+        show_victory_plate()
+
+
 root.mainloop()
