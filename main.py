@@ -49,22 +49,26 @@ def click(event):
 
 
 def get_empty_neighbor(index):
-    # получаем индекс пустой клетки в списке
     empty_index = board.index(EMPTY_SQUARE)
-    # узнаем расстояние от пустой клетки до клетки по которой кликнули
     abs_value = abs(empty_index - index)
-    # Если пустая клетка над или под клектой на которую кликнули
-    # возвращаем индекс пустой клетки
     if abs_value == BOARD_SIZE:
         return empty_index
-    # Если пустая клетка слева или справа
     elif abs_value == 1:
-        # Проверяем, чтобы блоки были в одном ряду
         max_index = max(index, empty_index)
         if max_index % BOARD_SIZE != 0:
             return empty_index
-    # Рядом с блоком не было пустого поля
     return index
+
+
+def show_victory_plate():
+    c.create_rectangle(SQUARE_SIZE / 5,
+                       SQUARE_SIZE * BOARD_SIZE / 2 - 10 * BOARD_SIZE,
+                       BOARD_SIZE * SQUARE_SIZE - SQUARE_SIZE / 5,
+                       SQUARE_SIZE * BOARD_SIZE / 2 + 10 * BOARD_SIZE,
+                       fill='#000000',
+                       outline='#FFFFFF')
+    c.create_text(SQUARE_SIZE * BOARD_SIZE / 2, SQUARE_SIZE * BOARD_SIZE / 1.9,
+                  text="Win!", font="Helvetica {} bold".format(int(10 * BOARD_SIZE)), fill='#DC143C')
 
 
 root.mainloop()
